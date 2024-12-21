@@ -1,4 +1,4 @@
-## An update of Dionne's [Question Gamne](https://github.com/CyberRewind/Questions-Game-)
+## An update of Dionne's [Question Game](https://github.com/CyberRewind/Questions-Game-)
 
 This version fetches questions from a "questions.json" file, rather than fetching them from the internet.
 
