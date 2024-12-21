@@ -1,4 +1,4 @@
-## An update of CyberRewind's [Question Game](https://github.com/CyberRewind/Questions-Game-)
+## An update of [CyberRewind](https://github.com/CyberRewind)'s [Question Game](https://github.com/CyberRewind/Questions-Game-)
 
 This version fetches questions from a "questions.json" file, rather than fetching them from the internet.
 
