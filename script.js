@@ -1,31 +1,27 @@
-const apiKey = "YOUR_API_KEY";
-const apiUrl = "https://api.openai.com/v1/completions";
+let questions = []; // Array to store the questions
 
 const button = document.getElementById("generate-btn");
 const questionContainer = document.getElementById("question");
 
-button.addEventListener("click", async () => {
-    questionContainer.textContent = "Generating a question...";
-    try {
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${apiKey}`,
-            },
-            body: JSON.stringify({
-                model: "text-davinci-003",
-                prompt: "Generate a creative, thought-provoking question for getting to know someone better and building a closer relationship.",
-                max_tokens: 50,
-                temperature: 0.7,
-            }),
-        });
+// Fetch the questions from the questions.json file
+fetch("questions.json")
+  .then(response => response.json()) // Parse the JSON data
+  .then(data => {
+    // Store the questions in the questions array
+    questions = data.questions;
+  })
+  .catch(error => {
+    console.error("Error loading questions:", error);
+    questionContainer.textContent = "Sorry, there was an error loading the questions.";
+  });
 
-        const data = await response.json();
-        const question = data.choices[0].text.trim();
-        questionContainer.textContent = question;
-    } catch (error) {
-        questionContainer.textContent = "Sorry, there was an error generating the question.";
-        console.error(error);
-    }
+button.addEventListener("click", () => {
+  // Check if the questions have been loaded
+  if (questions.length > 0) {
+    // Select a random question from the array
+    const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+    questionContainer.textContent = randomQuestion;
+  } else {
+    questionContainer.textContent = "Questions are still loading. Please try again shortly.";
+  }
 });
